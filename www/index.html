@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login</title>
+    <title>Esquecer senha</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -13,14 +13,14 @@
   <style type="text/css">
     
     body{
-      bg: lightblue;
+      background-color: lightblue;
     }
   </style>
   <body>
 
     <div class="container">
       <h1 class="container">Agente</h1>
-      <form action="/action_page.php">
+      <form class="form-horizontal" method="post" action="" id="formulario">
         <div class="form-group">
           <input type="text" class="form-control" id="email" name="email" placeholder= "E-mail">
         </div>
@@ -33,5 +33,30 @@
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#formulario').submit(function() {
+                var dados = $('#formulario').serialize();
+
+                $.ajax({
+                    type : 'POST',
+                    url  : 'cadastra.php',
+                    data : dados
+                })
+                .done(function(msg){
+                         $("#resultado").html(msg);
+                     })
+                .fail(function(jqXHR, textStatus, msg){
+                          alert("Erro: " +msg);
+                });
+
+                return false;
+            });
+        });
+    </script>
+
   </body>
 </html>
